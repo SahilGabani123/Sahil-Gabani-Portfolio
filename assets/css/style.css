@@ -159,6 +159,14 @@ body {
     animation: fadeInUp 0.8s ease-out;
 }
 
+.upwork-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    vertical-align: middle;
+    fill: #FACC15;
+}
+
 .hero-content h1 {
     font-size: 3.5rem;
     font-weight: bold;
