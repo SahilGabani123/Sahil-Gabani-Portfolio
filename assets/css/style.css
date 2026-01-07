@@ -250,6 +250,7 @@ body {
     transform: scale(1.05);
 }
 
+
 /* Hero Image */
 .hero-image {
     display: flex;
@@ -260,17 +261,26 @@ body {
 
 .image-wrapper {
     position: relative;
+    width: 20rem;
+    height: 24rem;
+    background: linear-gradient(to bottom right, #1E293B, #0F172A);
+    border: none;                /* Removed border */
+    border-radius: 1rem;
+    padding: 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
 }
 
+/* Remove yellow glow */
 .image-wrapper::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, #FACC15, #EAB308);
+    background: transparent;     /* Removed yellow gradient */
     border-radius: 1rem;
-    filter: blur(3rem);
-    opacity: 0.3;
-    animation: glow 2s ease-in-out infinite;
+    filter: none;
+    opacity: 0;
+    animation: none;
 }
 
 .image-wrapper {
