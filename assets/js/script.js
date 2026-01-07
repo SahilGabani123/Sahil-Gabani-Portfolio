@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
+    const tabsContainer = document.querySelector('.tabs-container');
 
     tabButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -14,6 +15,17 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add active class to clicked button and corresponding content
             this.classList.add('active');
             document.getElementById(tabId).classList.add('active');
+
+            // Scroll tab button into view on mobile
+            if (window.innerWidth <= 768) {
+                setTimeout(() => {
+                    this.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'center'
+                    });
+                }, 100);
+            }
         });
     });
 
