@@ -45,15 +45,6 @@ document.getElementById('downloadBtn').addEventListener('click', function () {
     document.body.removeChild(link);
 });
 
-// Mobile Menu Toggle
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', function() {
-        console.log('Mobile menu toggled');
-        // You can add mobile menu functionality here if needed
-    });
-}
-
 // Smooth Scrolling for Navigation Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -70,6 +61,61 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const drawer = document.getElementById('mobileDrawer');
+    const overlay = document.getElementById('drawerOverlay');
+    const closeBtn = document.getElementById('drawerClose');
+
+    if (!mobileMenuBtn || !drawer || !overlay || !closeBtn) {
+        console.error('Drawer elements missing');
+        return;
+    }
+
+    // OPEN DRAWER
+    mobileMenuBtn.addEventListener('click', () => {
+        drawer.classList.add('open');
+        overlay.classList.add('show');
+        mobileMenuBtn.classList.add('active');
+    });
+
+    function closeDrawer() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('show');
+        mobileMenuBtn.classList.remove('active');
+    }
+
+    closeBtn.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+
+    /* ==========================
+       TAB SYNC LOGIC (CORE)
+    ========================== */
+
+    const allTabs = document.querySelectorAll('.tab-btn');
+
+    allTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabName = tab.dataset.tab;
+
+            // Remove active from all tabs
+            allTabs.forEach(t => t.classList.remove('active'));
+
+            // Activate all matching tabs
+            document
+                .querySelectorAll(`.tab-btn[data-tab="${tabName}"]`)
+                .forEach(t => t.classList.add('active'));
+
+            // Close drawer if clicked from mobile
+            if (drawer.classList.contains('open')) {
+                closeDrawer();
+            }
+        });
+    });
+});
+
 
 // Add animation on scroll
 const observerOptions = {
@@ -139,15 +185,16 @@ document.addEventListener('DOMContentLoaded', function() {
         footerText.textContent = `© ${currentYear} Sahil Gabani. All rights reserved.`;
     }
 });
-
-// Active tab indicator animation
 const tabsContainer = document.querySelector('.tabs-container');
 if (tabsContainer) {
-    tabsContainer.addEventListener('scroll', function() {
-        const activeBtn = document.querySelector('.tab-btn.active');
+    tabsContainer.addEventListener('scroll', () => {
+        const activeBtn = tabsContainer.querySelector('.tab-btn.active');
         if (activeBtn) {
-            // Center the active button in view
-            activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            activeBtn.scrollIntoView({
+                behavior: 'smooth',
+                inline: 'center',
+                block: 'nearest'
+            });
         }
     });
 }

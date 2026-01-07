@@ -32,6 +32,126 @@ body {
     padding: 0 1rem;
 }
 
+/* =========================
+   Mobile Drawer Container
+========================= */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100vh;
+    background: #0F172A;
+    transition: right 0.3s ease;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-drawer.open {
+    right: 0;
+}
+
+/* =========================
+   Overlay
+========================= */
+.drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    z-index: 1500;
+}
+
+.drawer-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* =========================
+   Drawer Header
+========================= */
+.drawer-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(250, 204, 21, 0.2);
+}
+
+/* Hide "Menu" text */
+.drawer-header span {
+    display: none;
+}
+
+/* Close button (yellow tint) */
+.drawer-close {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #FACC15;
+}
+
+.drawer-close:hover {
+    color: #EAB308;
+}
+
+/* =========================
+   Drawer Content
+========================= */
+.drawer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;               /* SPACE BETWEEN BUTTONS */
+    padding: 1rem;
+}
+
+/* =========================
+   Drawer Menu Buttons
+========================= */
+.drawer-content .tab-btn {
+    width: 100%;
+    min-width: unset;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    text-align: left;
+    border-radius: 0.6rem;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.75); /* inactive text */
+    border: 1px solid rgba(250, 204, 21, 0.3);
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Hover */
+.drawer-content .tab-btn:hover {
+    background: rgba(250, 204, 21, 0.25);
+    color: #FFFFFF;
+}
+
+/* Active (selected) */
+.drawer-content .tab-btn.active {
+    background: rgba(250, 204, 21, 0.18);
+    color: #FFFFFF;            /* selected text WHITE */
+    border-color: #FACC15;
+    box-shadow: none;
+}
+
+/* Left indicator (optional but recommended) */
+.drawer-content .tab-btn.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12%;
+    width: 4px;
+    height: 76%;
+    background: #FACC15;
+    border-radius: 4px;
+}
+
 /* Animations */
 @keyframes slideDown {
     from {
